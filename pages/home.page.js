@@ -3,7 +3,7 @@ import BasePage from '../pages/base.page';
 class HomePage extends BasePage {
 
    //WebElements
-   get barraDeBusqueda(){ return $('#search') }
+   
    get usuarioConectado(){ return $('.welcome-msg') }
    get linkAccount() { return $("//span[@class='label'][normalize-space()='Account']"); }
    get linkLogIn() { return $('a[title="Log In"]'); }
