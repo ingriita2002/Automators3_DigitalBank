@@ -34,15 +34,6 @@ export default class BasePage {
        await elemento.keys(texto);
    }
 
-   /**
-    * Método para enviar texto a un elemento
-    * @param {String} username que recibirá el texto
-    * @param {String} pasword a envíar 
-    */
-   async login(){
-    
-
-   }
 
 
 }

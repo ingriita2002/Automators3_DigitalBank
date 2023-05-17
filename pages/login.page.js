@@ -3,21 +3,11 @@ import HomePage from "./home.page"
 
 class LoginPage extends BasePage{
     
-    get emailInput() { return $('#email') }
-    get passwordInput() { return $('#pass')}
-    get loginButton() { return $('//span[text()="Login"]') }
-    get btnCrearCuenta() { return $("//a[@title='Create an Account']")}
+    get emailInput() { return $('//input[@id="username"]') }
+    get passwordInput() { return $('//input[@id="password"]')}
+    get loginButton() { return $("//button[@id='submit']") }
+   
     
-
-    /**
-    * Ir a crear cuenta
-    */
-
-    async irAcrearCuenta() {
-        addStep(`Cliquear sobre Crear cuenta`)
-        await super.clickearElemento(this.btnCrearCuenta);
-    }
-     
 
     /**
     * Login
@@ -28,15 +18,10 @@ class LoginPage extends BasePage{
         addStep(`Loggearse con: ${email} y ${password}`)
         await this.emailInput.setValue(email)
         await this.passwordInput.setValue(password)
-        await browser.pause(5000);
+        await browser.pause(2000);
         await this.loginButton.click()
     }
-    async logOut() {
-        addStep('Cerrar sesion')
-        await HomePage.hacerClicEnAccount();
-        await HomePage.cerrarSesion();
-        
-    }
+    
 
 }
   
