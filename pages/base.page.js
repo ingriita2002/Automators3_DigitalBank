@@ -17,6 +17,7 @@ export default class BasePage {
        await elemento.keys(texto);
    }
 
-
-
+   addStep(message) {
+       console.log(`Step: ${message}`);
+   }
 }

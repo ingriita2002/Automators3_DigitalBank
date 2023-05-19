@@ -1,51 +1,39 @@
 import BasePage from './base.page';
 
 class HomePage extends BasePage {
+    get userAvatar() { return $("img[alt='User Avatar']"); }
+    get checkingAccount() { return $("#checking-menu"); }
+    get btnCerrarSesion() { return $("//a[@title='Log Out']"); }
+    get welcomeMessage() { return $('.active'); }
 
-   //WebElements
-   
-   get userAvatar(){ return $("img[alt='User Avatar']") }
-   get checkingAccount() { return $("#checking-menu"); }
-   get btnCerrarSesion() { return $("//a[@title='Log Out']"); }
+    async getConnectedUser() {
+        this.addStep('Obtener texto de la barra de búsqueda');
+        return await this.userAvatar.getText();
+    }
 
-   //-------------------------------------------------------------------------------------------------------//
-   // obtener nombre de usuario
-   async ConnectedUser() {
-      addStep('Obtener texto de la barra de búsqueda')
-      return await this.userAvatar.getText();
-   }
-
-   // Hacer clic en el boton ACCOUNT
-   async clicChecking() {
-      addStep('Dar clic en el boton ')
-      await (await this.checkingAccount).click();
-   }
-   async clicChecking() {
-      addStep('Dar clic en el boton ')
-      await (await this.checkingAccount).click();
-   }
+    async clickChecking() {
+        this.addStep('Dar clic en el botón');
+        await this.clickearElemento(this.checkingAccount);
+    }
 
     async cerrarSesion() {
         this.addStep('Dar clic en botón Log Out');
         await this.clickearElemento(this.btnCerrarSesion);
     }
 
-   async logOut() {
-      addStep('Cerrar sesion')
-      await HomePage.hacerClicEnAccount();
-      await HomePage.cerrarSesion();
-      
-  }
+    async logOut() {
+        this.addStep('Cerrar sesión');
+        await this.clickChecking();
+        await this.cerrarSesion();
+    }
 
-  /**
-   * Clear the value of a text input field.
-   * @param {WebdriverIO.Element} element - The text input field element.
-   */
-  async clearValue(element) {
-   await element.waitForClickable({ timeout: PAGE_TIMEOUT });
-   await element.clearValue();
- }
+    async open() {
+        await this.abrir('http://digitalbank.upcamp.io/bank/home');
+    }
 
+    async clearValue(element) {
+        await this.vaciarCampoYEnviarTexto(element, '');
+    }
 }
 
 export default new HomePage();
