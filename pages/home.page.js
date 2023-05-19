@@ -1,62 +1,51 @@
-import BasePage from '../pages/base.page';
+import BasePage from './base.page';
 
 class HomePage extends BasePage {
 
    //WebElements
-   get barraDeBusqueda(){ return $('#search') }
-   get usuarioConectado(){ return $('.welcome-msg') }
-   get linkAccount() { return $("//span[@class='label'][normalize-space()='Account']"); }
-   get linkLogIn() { return $('a[title="Log In"]'); }
+   
+   get userAvatar(){ return $("img[alt='User Avatar']") }
+   get checkingAccount() { return $("#checking-menu"); }
    get btnCerrarSesion() { return $("//a[@title='Log Out']"); }
 
    //-------------------------------------------------------------------------------------------------------//
    // obtener nombre de usuario
-   async obtenerUsuarioConectado() {
+   async ConnectedUser() {
       addStep('Obtener texto de la barra de búsqueda')
-      return await this.usuarioConectado.getText();
-   }
-
-   async estaConectado() {
-      const nombreUsuario = await this.usuarioConectado.getText();
-      return nombreUsuario !== 'WELCOME';
-   }
-
-   /**
-    * Escribe el artículo en el campo de búsqueda y presiona Enter
-    * @param {String} articulo que se buscará
-    */
-   async buscar(articulo) {
-      addStep(`Buscar artículo: ${articulo}`)
-      await super.vaciarCampoYEnviarTexto(await this.barraDeBusqueda, articulo);
-      await this.barraDeBusqueda.keys('Enter');
-   }
-
-   /**
-    * Obtener texto de la barra de búsqueda
-    */
-   async obtenerTextoBusqueda() {
-      addStep('Obtener texto de la barra de búsqueda')
-      return await this.barraDeBusqueda.getValue();
+      return await this.userAvatar.getText();
    }
 
    // Hacer clic en el boton ACCOUNT
-   async hacerClicEnAccount() {
-      addStep('Dar clic en el boton ACCOUNT')
-      await (await this.linkAccount).click();
+   async clicChecking() {
+      addStep('Dar clic en el boton ')
+      await (await this.checkingAccount).click();
    }
-   //Hacer clic en el boton Log In
-   async hacerClicEnLogIn() {
-      addStep('Dar clic en el boton log IN')
-      await (await this.linkLogIn).click();
+   async clicChecking() {
+      addStep('Dar clic en el boton ')
+      await (await this.checkingAccount).click();
    }
 
-   // Cerrar sesión
-   async cerrarSesion() {
-      addStep('Dar clic en boton log Out')
-      await (await this.btnCerrarSesion).click();
-   }
+    async cerrarSesion() {
+        this.addStep('Dar clic en botón Log Out');
+        await this.clickearElemento(this.btnCerrarSesion);
+    }
+
+   async logOut() {
+      addStep('Cerrar sesion')
+      await HomePage.hacerClicEnAccount();
+      await HomePage.cerrarSesion();
+      
+  }
+
+  /**
+   * Clear the value of a text input field.
+   * @param {WebdriverIO.Element} element - The text input field element.
+   */
+  async clearValue(element) {
+   await element.waitForClickable({ timeout: PAGE_TIMEOUT });
+   await element.clearValue();
+ }
 
 }
 
 export default new HomePage();
-

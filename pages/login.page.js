@@ -1,8 +1,11 @@
-import BasePage from "./base.page"
-import HomePage from "./home.page"
+import BasePage from '../pages/base.page';
 
-class LoginPage extends BasePage{
+class LoginPage extends BasePage {
+    get username() { return $('#username'); }
+    get password() { return $('#password'); }
+    get submitBtn() { return $('#submit'); }
     
+<<<<<<< Updated upstream
     get emailInput() { return $('#email') }
     get passwordInput() { return $('#pass')}
     get loginButton() { return $('//span[text()="Login"]') }
@@ -37,7 +40,17 @@ class LoginPage extends BasePage{
         await HomePage.cerrarSesion();
         
     }
+=======
+    async open() {
+        await this.abrir('http://digitalbank.upcamp.io/bank/login');
+    }
+>>>>>>> Stashed changes
 
+    async login(username, password) {
+        await this.vaciarCampoYEnviarTexto(this.username, username);
+        await this.vaciarCampoYEnviarTexto(this.password, password);
+        await this.clickearElemento(this.submitBtn);
+    }
 }
-  
+
 export default new LoginPage();
