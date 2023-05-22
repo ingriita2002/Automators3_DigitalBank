@@ -1,53 +1,44 @@
 import BasePage from '../pages/base.page';
 
 class HomePage extends BasePage {
+  // WebElements
+  get userAvatar() { return $("//img[@alt='User Avatar']"); }
+  get checkingAccountBtn() { return $("#checking-menu"); }
+  get newCheckingBtn() { return $("//a[@id='new-checking-menu-item']"); }
+  get btnCerrarSesion() { return $("//a[@href='/bank/logout']"); }
+  get btnDeleteData() { return $("//a[@href='/bank/user/delete-data']"); }
 
-   //WebElements
-   
-   get userAvatar(){ return $("img[alt='User Avatar']") }
-   get checkingAccount() { return $("#checking-menu"); }
-   get btnCerrarSesion() { return $("//a[@title='Log Out']"); }
-
-   //-------------------------------------------------------------------------------------------------------//
-   // obtener nombre de usuario
-   async ConnectedUser() {
-      addStep('Obtener texto de la barra de búsqueda')
-      return await this.userAvatar.getText();
-   }
-
-   // Hacer clic en el boton ACCOUNT
-   async clicChecking() {
-      addStep('Dar clic en el boton ')
-      await (await this.checkingAccount).click();
-   }
-   async clicChecking() {
-      addStep('Dar clic en el boton ')
-      await (await this.checkingAccount).click();
-   }
-
-   // Cerrar sesión
-   async cerrarSesion() {
-      addStep('Dar clic en boton log Out')
-      await (await this.btnCerrarSesion).click();
-   }
-
-   async logOut() {
-      addStep('Cerrar sesion')
-      await HomePage.hacerClicEnAccount();
-      await HomePage.cerrarSesion();
-      
+  //-------------------------------------------------------------------------------------------------------//
+  // Obtener nombre de usuario
+  async getConnectedUser() {
+    addStep('Obtener texto de la barra de búsqueda');
+    return await this.userAvatar.getText();
   }
 
-  /**
-   * Clear the value of a text input field.
-   * @param {WebdriverIO.Element} element - The text input field element.
-   */
-  async clearValue(element) {
-   await element.waitForClickable({ timeout: PAGE_TIMEOUT });
-   await element.clearValue();
- }
+  // Hacer clic en los botones checking
+  async clickChecking() {
+    addStep('Dar clic en el botón');
+    await this.checkingAccountBtn.click();
+  }
 
+  async clickNewChecking() {
+    addStep('Dar clic en el botón');
+    await this.newCheckingBtn.click();
+  }
+
+  // Cerrar sesión
+  async cerrarSesion() {
+    addStep('Dar clic en botón Log Out');
+    await this.btnCerrarSesion.click();
+  }
+
+  // Borrar datos creados
+  async clickDeleteData() {
+    addStep('Borrar datos creados');
+    await this.btnDeleteData.click();
+  }
 }
 
 export default new HomePage();
+
 

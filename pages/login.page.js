@@ -7,7 +7,6 @@ class LoginPage extends BasePage{
     get passwordInput() { return $('//input[@id="password"]')}
     get loginButton() { return $("//button[@id='submit']") }
    
-    
 
     /**
     * Login
@@ -21,7 +20,11 @@ class LoginPage extends BasePage{
         await browser.pause(2000);
         await this.loginButton.click()
     }
-    
+    async logOut() {
+        addStep('Cerrar sesion')
+        await HomePage.cerrarSesion();
+        
+    }
 
 }
   
