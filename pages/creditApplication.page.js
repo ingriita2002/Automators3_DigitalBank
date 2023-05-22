@@ -30,6 +30,10 @@ class CreditApplicationPage extends BasePage {
         await this.clickearElemento(this.financialInformationSection);
     }
 
+    async selectOptionByValue(element, optionValue) {
+        await element.selectByAttribute('value', optionValue);
+    }
+
     async selectEmploymentStatus(optionValue) {
         await this.selectOptionByValue(this.employmentStatusDropdown, optionValue);
     }
@@ -58,8 +62,9 @@ class CreditApplicationPage extends BasePage {
         await this.vaciarCampoYEnviarTexto(this.creditCardSpendPerMonthInput, value);
     }
 
-    async selectBankAccounts(optionValue) {
-        await this.selectOptionByValue(this.bankAccountsDropdown, optionValue);
+    async selectBankAccounts() {
+        const optionText = 'Neither'; // Texto correspondiente a la opción a seleccionar
+        await this.selectOptionByText(this.bankAccountsDropdown, optionText);
     }
 
     async clickBlankChecksInterestCheckbox() {
@@ -80,6 +85,10 @@ class CreditApplicationPage extends BasePage {
 
     async getCreditApplicationStatus() {
         return await this.creditApplicationStatusText.getText();
+    }
+    async selectOptionByText(element, optionText) {
+        await element.waitForExist();
+        await element.selectByVisibleText(optionText);
     }
 }
 

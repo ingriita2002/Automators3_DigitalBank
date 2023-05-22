@@ -1,8 +1,12 @@
-import BasePage from './base.page';
+import BasePage, { PAGE_TIMEOUT } from './base.page';
+
+
+
 
 class HomePage extends BasePage {
     get userAvatar() { return $("img[alt='User Avatar']"); }
     get checkingAccount() { return $("#checking-menu"); }
+    get creditMenu() { return $("#credit-menu"); }
     get btnCerrarSesion() { return $("//a[@title='Log Out']"); }
     get welcomeMessage() { return $('.active'); }
 
@@ -15,6 +19,17 @@ class HomePage extends BasePage {
         this.addStep('Dar clic en el botón');
         await this.clickearElemento(this.checkingAccount);
     }
+
+    async clickCreditMenu() {
+        this.addStep('Dar clic en el menú Credit');
+        await this.clickearElemento(this.creditMenu);
+    }
+
+    async clickNewApplicationMenuItem() {
+      const newApplicationMenuItem = $('//a[@id="new-credit-application-menu-item"]');
+      await newApplicationMenuItem.waitForClickable({ timeout: PAGE_TIMEOUT });
+      await newApplicationMenuItem.click();
+  }
 
     async cerrarSesion() {
         this.addStep('Dar clic en botón Log Out');

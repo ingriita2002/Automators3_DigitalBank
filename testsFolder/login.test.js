@@ -4,9 +4,9 @@ import LoginPage from '../pages/login.page';
 import HomePage from '../pages/home.page';
 import { assert } from 'chai';
 
-// Leer el archivo JSON
+// Leer el archivo JSON !! VER user_data.json  !! Agregar sus users  <-----
 const data = fs.readFileSync(path.resolve(__dirname, '../data/user_data.json'));
-const user = JSON.parse(data).loginUsers[0];  // Asumiendo que siempre queremos el primer usuario
+const user = JSON.parse(data).loginUsers[2];  // ----->  !! [0]=Lucelys, [1]=Augusto  [2]=Agustinho  
 
 describe('Digital Bank Login', function () {
     beforeEach(async function() {

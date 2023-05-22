@@ -1,11 +1,9 @@
 {
-  "name": "prueba-final-webdriver-abstracta",
+  "name": "",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "directories": {
-    "test": "test",
-    "wdio.conf.js": "wdio.conf.js"
+    "test": "tests"
   },
   "dependencies": {
     "@wdio/cli": "^7.27.0",
