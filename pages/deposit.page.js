@@ -1,14 +1,30 @@
 import BasePage from '../pages/base.page';
 
 class DepositPage extends BasePage {
-  get accountDropdown() { return $("//select[@id='selectedAccount']"); }
+
+  get accountDropdown() { return $("#selectedAccount"); }
+  get depositNameInput() { return $("option[value='18442']");} 
   get depositAmountInput() { return $("//input[@id='amount']"); }
   get submitButton() { return $("//button[normalize-space()='Submit']"); }
-  get viewCheckingLink() { return $("//a[@id='view-checking-menu-item']"); }
+  get viewCheckingTitle() { return $('#page-title'); }
 
-  async selectAccountForDeposit(accountName) {
-    await this.accountDropdown.selectByVisibleText(accountName);
+  
+
+  async selectAccountDeposit() {
+    await this.clickearElemento(this.accountDropdown);
+
   }
+ /* async selectAccountForDeposit() {
+    this.addStep('Selecionar cuenta');
+    await super.clickearElemento(this.depositNameInput);
+  }*/
+  async selectAccountForDeposit() {
+    this.addStep('Selecionar cuenta');
+    const selectBox = await $('#selectedAccount');
+    await selectBox.selectByVisibleText('(Standard Checking)');
+  }
+
+
 
   async enterDepositAmount(amount) {
     await this.depositAmountInput.setValue(amount);
@@ -19,7 +35,7 @@ class DepositPage extends BasePage {
   }
 
   async goToViewCheckingPage() {
-    await this.viewCheckingLink.click();
+    await this.viewCheckingTitle.getText();
   }
 }
 

@@ -8,6 +8,7 @@ class CreateNewCheckingPage extends BasePage {
   get campName() { return $("//input[@id='name']"); }
   get campAmount() { return $("//input[@id='openingBalance']"); }
   get btnSubmitChecking() { return $("//button[@id='newCheckingSubmit']"); }
+  get mensajeconfirmacion () {return $("#new-account-msg");}
 
   /**
    * Crear nueva cuenta checking
@@ -28,17 +29,15 @@ class CreateNewCheckingPage extends BasePage {
   }
 
   /**
-   * Esperar a que se haya creado la cuenta
-   */
-  async waitForAccountCreated() {
-    const element = await $("//selector/del/elemento");
-    await browser.waitUntil(async () => {
-      return await element.isDisplayed();
-    }, {
-      timeout: PAGE_TIMEOUT,
-      timeoutMsg: 'El elemento no se ha vuelto visible en el tiempo esperado'
-    });
-  }
+ * Esperar a que se haya creado la cuenta y se muestre la página de "New Checking" con detalles de transacción
+ */
+  async obtenerMensajeConfirmacionNCkng() {
+    addStep('Obtener mensaje de confirmacion nueva cuenta creada')
+    return await this.mensajeconfirmacion.getText();
+ }
+ 
+ 
+
 }
 
 export default new CreateNewCheckingPage();

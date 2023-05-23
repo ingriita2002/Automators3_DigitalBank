@@ -2,10 +2,17 @@ import BasePage from '../pages/base.page';
 
 class WithdrawPage extends BasePage {
 
-    get accountWithdrawn() { return $("//select[@id='selectedAccount']"); }
+    get withdrawnDropdown() { return $('#selectedAccount'); }
     get withdrawAmount() { return $("//input[@id='amount']"); }
     get submitWithdrawnBtn() { return $("//button[normalize-space()='Submit']"); }
     get viewCheckingLink() { return $("//a[@id='view-checking-menu-item']"); }
+
+
+    
+    async selectDropdownWithdraw() {
+    await this.clickearElemento(this.withdrawnDropdown);
+
+    }
   
     async selectAccountForWithdrawn(accountName) {
       await this.accountWithdrawn.selectByVisibleText(accountName);
@@ -15,7 +22,7 @@ class WithdrawPage extends BasePage {
       await this.withdrawAmount.setValue(amount);
     }
   
-    async clickSubmitW() {
+    async clickSubmitWithdraw() {
       await this.submitWithdrawnBtn.click();
     }
   
