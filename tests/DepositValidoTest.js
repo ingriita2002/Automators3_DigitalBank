@@ -4,35 +4,44 @@ import LoginPage from '../pages/login.page';
 import CreateNewCheckingPage from '../pages/createNewChecking.page';
 import DepositPage from '../pages/deposit.page';
 
-(async () => {
+const email = 'luisalopez@gmail.com';
+const password = 'Luisa123456';
+const nameAccount ='LuisaL';
+const amount ='20000';
+const depositAmount = '2500';
+
 
   describe('Realizar una nueva cuenta Checking, inicio de sesión y un depósito exitoso', () => {
     before(async () => {
+
+    
       // Precondiciones: Crear una nueva cuenta Checking
-      await LoginPage.login('email', 'password');
+      await LoginPage.login(email, password);
       await HomePage.clickChecking();
       await HomePage.clickNewChecking();
-      await CreateNewCheckingPage.createNewAccountChecking('Ana1', '15000');
+      await CreateNewCheckingPage.createNewAccountChecking(nameAccount, amount);
       await CreateNewCheckingPage.clickSubmitChecking();
       await CreateNewCheckingPage.waitForAccountCreated();
     });
 
     it('Realizar un depósito válido a una cuenta Checking', async () => {
+
+      await HomePage.abrir('/');
       // Inicio de sesión
       await LoginPage.login('email', 'password');
 
       // Navegar a la página de depósito
       await HomePage.clickChecking();
       await HomePage.clickNewChecking();
-      await CreateNewCheckingPage.createNewAccountChecking('Ana1', '15000');
+      await CreateNewCheckingPage.createNewAccountChecking(nameAccount, depositAmount);
       await CreateNewCheckingPage.clickSubmitChecking();
       await CreateNewCheckingPage.waitForAccountCreated();
 
       // Seleccionar la cuenta para el depósito
-      await DepositPage.selectAccountForDeposit('Nueva Cuenta');
+      await DepositPage.selectAccountForDeposit(nameAccount);
 
       // Ingresar el monto del depósito
-      await DepositPage.enterDepositAmount('500');
+      await DepositPage.enterDepositAmount(depositAmount);
 
       // Enviar el formulario de depósito
       await DepositPage.clickSubmit();
@@ -52,5 +61,4 @@ import DepositPage from '../pages/deposit.page';
     });
   });
 
-})();
 

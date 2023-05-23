@@ -1,31 +1,19 @@
-import BasePage from "./base.page"
-import HomePage from "./home.page"
+import BasePage from '../pages/base.page';
 
-class LoginPage extends BasePage{
+class LoginPage extends BasePage {
+    get username() { return $('#username'); }
+    get password() { return $('#password'); }
+    get submitBtn() { return $('#submit'); }
     
-    get emailInput() { return $('//input[@id="username"]') }
-    get passwordInput() { return $('//input[@id="password"]')}
-    get loginButton() { return $("//button[@id='submit']") }
-   
-
-    /**
-    * Login
-    * @param {String} email 
-    * @param {String} password
-    */
-    async login(email,password) {
-        addStep(`Loggearse con: ${email} y ${password}`)
-        await this.emailInput.setValue(email)
-        await this.passwordInput.setValue(password)
-        await browser.pause(2000);
-        await this.loginButton.click()
-    }
-    async logOut() {
-        addStep('Cerrar sesion')
-        await HomePage.cerrarSesion();
-        
+    async open() {
+        await this.abrir('http://digitalbank.upcamp.io/bank/login');
     }
 
+    async login(username, password) {
+        await this.vaciarCampoYEnviarTexto(this.username, username);
+        await this.vaciarCampoYEnviarTexto(this.password, password);
+        await this.clickearElemento(this.submitBtn);
+    }
 }
-  
+
 export default new LoginPage();
