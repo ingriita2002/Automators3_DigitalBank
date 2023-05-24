@@ -3,14 +3,14 @@ import path from 'path';
 import LoginPage from '../pages/login.page';
 import HomePage from '../pages/home.page';
 import CreateNewCheckingPage from '../pages/createNewChecking.page';
-import DepositPage from '../pages/deposit.page';
+import WithdrawPage from '../pages/withdraw.page';
 import { assert } from 'chai';
 
 const data = fs.readFileSync(path.resolve(__dirname, '../data/user_data.json'));
 const mensaje = fs.readFileSync(path.resolve(__dirname, '../data/mensajes.json'));
 const users = JSON.parse(data).loginUsers;
-const nameAccount = 'LuisaL';
-const depositAmount = '1500';
+const nameAccount = 'Luisa2023';
+const depositAmount = '2000';
 const mensajes = JSON.parse(mensaje).mensajes;
 
 
@@ -21,30 +21,29 @@ describe('Realizar una nueva cuenta Checking, inicio de sesión y un depósito e
     const user = users[0];
     // Inicio de sesión
     await LoginPage.login(user.username, user.password);
-    //crear nueva cuenta checking
+    //Crear cuenta checking
     await HomePage.irNewChecking();
     await CreateNewCheckingPage.createNewAccountChecking(nameAccount, depositAmount);
     await CreateNewCheckingPage.clickSubmitChecking();
     await CreateNewCheckingPage.obtenerMensajeConfirmacionNCkng();
     const mensajeNewChecking = mensajes[0];
-    assert.strictEqual(await CreateNewCheckingPage.obtenerMensajeConfirmacionNCkng(), mensajeNewChecking.confirmacionCreateNewAccountChecking + ' ' + nameAccount);
-
+     assert.strictEqual(await CreateNewCheckingPage.obtenerMensajeConfirmacionNCkng(), mensajeNewChecking.confirmacionCreateNewAccountChecking + ' ' + nameAccount);
 
   });
   it('Realizar un depósito válido a una cuenta Checking', async () => {
     try {
       
-      // Navegar a la página de depósito
-      await HomePage.irADeposit();
-      await DepositPage.selectAccountDeposit();
-      // Seleccionar la cuenta para el depósito
-      await DepositPage.selectAccountForDeposit();
+      // ir a la página de depósito
+      await HomePage.irAWithdrawMenu();
+       // Seleccionar la cuenta para el depósito
+      await WithdrawPage.selectDropdownWithdraw();
       // Ingresar el monto del depósito
-      await DepositPage.enterDepositAmount(depositAmount);
+      await WithdrawPage.selectAccountForWithdraw();
+      await WithdrawPage.enterWithdrawnAmount(depositAmount);
       // Enviar el formulario de depósito
-      await DepositPage.clickSubmit();
+      await WithdrawPage.clickSubmitWithdraw();
       // Verificar que se haya redirigido a la página de vista de la cuenta Checking
-      await DepositPage.validarViewCheckingPage();
+      await WithdrawPage.validarViewCheckingPage();
       // Realizar las verificaciones adicionales en la página de vista de la cuenta Checking
       // Borrar los datos creados usando el botón "Delete Data" en el menú superior derecho en el home
       await HomePage.clickDeleteData();
@@ -59,8 +58,3 @@ describe('Realizar una nueva cuenta Checking, inicio de sesión y un depósito e
     await HomePage.logOut();
   });
 });
-
-
-
-
-

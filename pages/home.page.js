@@ -20,7 +20,7 @@ class HomePage extends BasePage {
     async irNewChecking() {
         this.addStep('Dar clic en el botón');
         await this.clickearElemento(this.checkingAccount);
-        addStep('Dar clic en el botón');
+        this.addStep('Dar clic en el botón');
         await this.clickearElemento(this.newCheckingBtn);
     }
 
