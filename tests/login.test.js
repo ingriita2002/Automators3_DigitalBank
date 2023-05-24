@@ -6,11 +6,8 @@ import { assert } from 'chai';
 
 // Leer el archivo JSON !! VER user_data.json  !! Agregar sus users  <-----
 const data = fs.readFileSync(path.resolve(__dirname, '../data/user_data.json'));
-<<<<<<<<< Temporary merge branch 1
-const user = JSON.parse(data).loginUsers[0];  // ----->  !! [0]=Lucelys, [1]=Augusto  [2]=Agustinho  
-=========
 const user = JSON.parse(data).loginUsers[1];  // ----->  !! [0]=Lucelys, [1]=Augusto  [2]=Agustinho  
->>>>>>>>> Temporary merge branch 2
+
 
 describe('Digital Bank Login', function () {
     beforeEach(async function() {
