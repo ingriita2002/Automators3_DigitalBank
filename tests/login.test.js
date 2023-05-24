@@ -6,7 +6,7 @@ import { assert } from 'chai';
 
 // Leer el archivo JSON !! VER user_data.json  !! Agregar sus users  <-----
 const data = fs.readFileSync(path.resolve(__dirname, '../data/user_data.json'));
-const user = JSON.parse(data).loginUsers[2];  // ----->  !! [0]=Lucelys, [1]=Augusto  [2]=Agustinho  
+const user = JSON.parse(data).loginUsers[1];  // ----->  !! [0]=Lucelys, [1]=Augusto  [2]=Agustinho  
 
 describe('Digital Bank Login', function () {
     beforeEach(async function() {
@@ -15,7 +15,7 @@ describe('Digital Bank Login', function () {
     });
 
 
-    it(`Login user: "${user.firstName} ${user.lastName}" and Validate Welcome Message`, async function () {
+    it(`Login user: "${user.firstName} ${user.lastName}" and Validate Welcome Message`, async function () { 
         try {
             await LoginPage.login(user.username, user.password);
 
