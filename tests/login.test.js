@@ -15,7 +15,7 @@ describe('Digital Bank Login', function () {
     });
 
 
-    it(`Login user: "${user.firstName} ${user.lastName}" and Validate Welcome Message`, async function () {
+    it(`Login user: "${user.firstName} ${user.lastName}" and Validate Welcome Message`, async function () { 
         try {
             await LoginPage.login(user.username, user.password);
 
