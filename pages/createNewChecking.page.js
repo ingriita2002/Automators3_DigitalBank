@@ -16,7 +16,7 @@ class CreateNewCheckingPage extends BasePage {
    * @param {String} amount
    */
   async createNewAccountChecking(name, amount) {
-    addStep(`Crear cuenta con: ${name} ${amount}`);
+    this.addStep(`Crear cuenta con: ${name} ${amount}`);
     await this.selectStandardChecking.click();
     await this.selectAccountIndividual.click();
     await this.campName.setValue(name);
@@ -24,7 +24,7 @@ class CreateNewCheckingPage extends BasePage {
   }
 
   async clickSubmitChecking() {
-    addStep('Enviar formulario');
+    this.addStep('Enviar formulario');
     await this.btnSubmitChecking.click();
   }
 
@@ -32,7 +32,7 @@ class CreateNewCheckingPage extends BasePage {
  * Esperar a que se haya creado la cuenta y se muestre la página de "New Checking" con detalles de transacción
  */
   async obtenerMensajeConfirmacionNCkng() {
-    addStep('Obtener mensaje de confirmacion nueva cuenta creada')
+    this.addStep('Obtener mensaje de confirmacion nueva cuenta creada')
     return await this.mensajeconfirmacion.getText();
  }
  
