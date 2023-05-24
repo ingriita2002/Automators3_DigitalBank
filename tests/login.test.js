@@ -6,7 +6,11 @@ import { assert } from 'chai';
 
 // Leer el archivo JSON !! VER user_data.json  !! Agregar sus users  <-----
 const data = fs.readFileSync(path.resolve(__dirname, '../data/user_data.json'));
+<<<<<<< HEAD
 const user = JSON.parse(data).loginUsers[1];  // ----->  !! [0]=Lucelys, [1]=Augusto  [2]=Agustinho  
+=======
+const user = JSON.parse(data).loginUsers[0];  // ----->  !! [0]=Lucelys, [1]=Augusto  [2]=Agustinho  
+>>>>>>> 25836a76a9068c9a6234912b2333530f5a637ce1
 
 describe('Digital Bank Login', function () {
     beforeEach(async function() {
