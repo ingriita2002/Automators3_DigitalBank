@@ -1,16 +1,22 @@
 {
-    "loginUsers": [
-      {
-        "username": "luisalopez@gmail.com",
-        "password": "Luisa123456",
-        "firstName": "Luisa",
-        "lastName": "Lopez"
-      },
-      {
-        "username": "soyal@mimail.com",
-        "password": "Maa69391!",
-        "firstName": "Soyal",
-        "lastName": "Mamay"
-      }
-    ]
+  "loginUsers": [
+    {
+      "username": "luisalopez@gmail.com",
+      "password": "Luisa123456",
+      "firstName": "Luisa",
+      "lastName": "Lopez"
+    },
+    {
+      "username": "soyal@mimail.com",
+      "password": "Maa69391!",
+      "firstName": "Soyal",
+      "lastName": "Mamay"
+    },
+    {
+      "username": "ingra1@mimail.com",
+      "password": "Maagdaleniita1419",
+      "firstName": "Ingra",
+      "lastName": "Rosa"
+    }
+  ]
 }
