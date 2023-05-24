@@ -26,16 +26,14 @@ describe('Realizar una nueva cuenta Checking, inicio de sesión y un depósito e
   it('Realizar un depósito válido a una cuenta Checking', async () => {
     try {
       
-      // Navegar a la página de depósito
-     await HomePage.clickChecking();
-     await HomePage.clickNewChecking();
+     await HomePage.irNewChecking();
      await CreateNewCheckingPage.createNewAccountChecking(nameAccount, depositAmount);
      await CreateNewCheckingPage.clickSubmitChecking();
      await CreateNewCheckingPage.obtenerMensajeConfirmacionNCkng();
      const mensajeNewChecking = mensajes[0];
      assert.strictEqual(await CreateNewCheckingPage.obtenerMensajeConfirmacionNCkng(), mensajeNewChecking.confirmacionCreateNewAccountChecking + ' ' + nameAccount);
-      
-      await HomePage.clickDeposit();
+      // Navegar a la página de depósito
+      await HomePage.irADeposit();
       await DepositPage.selectAccountDeposit();
       // Seleccionar la cuenta para el depósito
       await DepositPage.selectAccountForDeposit();
@@ -44,10 +42,11 @@ describe('Realizar una nueva cuenta Checking, inicio de sesión y un depósito e
       // Enviar el formulario de depósito
       await DepositPage.clickSubmit();
       // Verificar que se haya redirigido a la página de vista de la cuenta Checking
-      assert.ok(await DepositPage.goToViewCheckingPage());
+      await DepositPage.goToViewCheckingPage();
       // Realizar las verificaciones adicionales en la página de vista de la cuenta Checking
       // Borrar los datos creados usando el botón "Delete Data" en el menú superior derecho en el home
       await HomePage.clickDeleteData();
+      await browser.pause(2000);
     } catch (error) {
       console.error('Error during test:', error);
       throw error;

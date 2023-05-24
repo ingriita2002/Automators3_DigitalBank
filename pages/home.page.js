@@ -17,20 +17,19 @@ class HomePage extends BasePage {
         return await this.userAvatar.getText();
     }
 
-    async clickChecking() {
+    async irNewChecking() {
         this.addStep('Dar clic en el botón');
-        await this.checkingAccount.click()
+        await this.clickearElemento(this.checkingAccount);
+        addStep('Dar clic en el botón');
+        await this.clickearElemento(this.newCheckingBtn);
     }
-    async clickNewChecking() {
-      addStep('Dar clic en el botón');
-      await this.newCheckingBtn.click();
-    }
+
     
-    async clickDeposit() {
+    async irADeposit() {
       this.addStep('Dar clic en el botón Deposit');
-      await this.depositMenuBtn.click()
+      await this.clickearElemento(this.depositMenuBtn);
     }
-    async clicWithdrawMenu() {
+    async irAWithdrawMenu() {
       this.addStep('Dar clic en el botón Withdraw');
       await this.withdrawMenuBtn.click()
     }
@@ -53,7 +52,7 @@ class HomePage extends BasePage {
 
     async logOut() {
         this.addStep('Cerrar sesión');
-        await this.clickChecking();
+        await this.userAvatar.click();
         await this.cerrarSesion();
     }
 
@@ -68,6 +67,7 @@ class HomePage extends BasePage {
      //Borrar datos creados
   async clickDeleteData() {
     addStep('Borrar datos creados');
+    await this.userAvatar.click();
     await this.btnDeleteData.click();
   }
 }

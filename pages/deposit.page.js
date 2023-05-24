@@ -21,7 +21,8 @@ class DepositPage extends BasePage {
   async selectAccountForDeposit() {
     this.addStep('Selecionar cuenta');
     const selectBox = await $('#selectedAccount');
-    await selectBox.selectByVisibleText('(Standard Checking)');
+    await selectBox.selectByVisibleText('LuisaL (Standard Checking)');
+    await browser.pause(2000);
   }
 
 
@@ -35,7 +36,11 @@ class DepositPage extends BasePage {
   }
 
   async goToViewCheckingPage() {
-    await this.viewCheckingTitle.getText();
+    const pageTituloElem = await $('#page-title');
+    await pageTituloElem.waitForExist({ timeout: 5000 });
+    const pageTitulo = await pageTituloElem.getText();
+    console.log(`Application Status: ${pageTitulo}`);
+    assert.include(pageTitulo, 'View Checking Accounts', 'Application status is not as expected');
   }
 }
 
