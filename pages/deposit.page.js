@@ -14,10 +14,7 @@ class DepositPage extends BasePage {
     await this.clickearElemento(this.accountDropdown);
 
   }
- /* async selectAccountForDeposit() {
-    this.addStep('Selecionar cuenta');
-    await super.clickearElemento(this.depositNameInput);
-  }*/
+
   async selectAccountForDeposit() {
     this.addStep('Selecionar cuenta');
     const selectBox = await $('#selectedAccount');
@@ -35,12 +32,12 @@ class DepositPage extends BasePage {
     await this.submitButton.click();
   }
 
-  async goToViewCheckingPage() {
+  async validarViewCheckingPage() {
     const pageTituloElem = await $('#page-title');
     await pageTituloElem.waitForExist({ timeout: 5000 });
     const pageTitulo = await pageTituloElem.getText();
     console.log(`Application Status: ${pageTitulo}`);
-    assert.include(pageTitulo, 'View Checking Accounts', 'Application status is not as expected');
+    assert.include(pageTitulo, 'View Checking Accounts', 'La pagina de view checking no se visualizo correctamente');
   }
 }
 

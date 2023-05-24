@@ -14,8 +14,11 @@ class WithdrawPage extends BasePage {
 
     }
   
-    async selectAccountForWithdrawn(accountName) {
-      await this.accountWithdrawn.selectByVisibleText(accountName);
+    async selectAccountForWithdraw() {
+      this.addStep('Selecionar cuenta');
+      const selectBox = await $('#selectedAccount');
+      await selectBox.selectByVisibleText('Luisa2023 (Standard Checking)');
+      await browser.pause(2000);
     }
   
     async enterWithdrawnAmount(amount) {
@@ -23,11 +26,15 @@ class WithdrawPage extends BasePage {
     }
   
     async clickSubmitWithdraw() {
-      await this.submitWithdrawnBtn.click();
+      await this.clickearElemento(this.submitWithdrawnBtn);
     }
   
-    async goToViewCheckingPage() {
-      await this.viewCheckingLink.click();
+    async validarViewCheckingPage() {
+      const pageTituloElem = await $('#page-title');
+      await pageTituloElem.waitForExist({ timeout: 5000 });
+      const pageTitulo = await pageTituloElem.getText();
+      console.log(`Application Status: ${pageTitulo}`);
+      assert.include(pageTitulo, 'View Checking Accounts', 'La pagina de view checking no se visualizo correctamente');
     }
   }
   
