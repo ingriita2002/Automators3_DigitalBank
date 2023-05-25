@@ -4,6 +4,7 @@ import LoginPage from '../pages/login.page';
 import HomePage from '../pages/home.page';
 import CreateNewCheckingPage from '../pages/createNewChecking.page';
 import DepositPage from '../pages/deposit.page';
+import allure from '@wdio/allure-reporter';
 import { assert } from 'chai';
 
 const data = fs.readFileSync(path.resolve(__dirname, '../data/user_data.json'));
@@ -17,12 +18,15 @@ const mensajes = JSON.parse(mensaje).mensajes;
 describe('Realizar una nueva cuenta Checking, inicio de sesión y un depósito exitoso', () => {
   before(async () => {
     await LoginPage.open();
+    allure.addStep('Opening Login Page');
     // Obtener el primer usuario del archivo JSON
     const user = users[0];
-    // Inicio de sesión
+
     await LoginPage.login(user.username, user.password);
-    //crear nueva cuenta checking
+    allure.addStep(`Logged in as user: ${user.username}`);
+    
     await HomePage.irNewChecking();
+    allure.addStep('Create new checking account');
     await CreateNewCheckingPage.createNewAccountChecking(nameAccount, depositAmount);
     await CreateNewCheckingPage.clickSubmitChecking();
     await CreateNewCheckingPage.obtenerMensajeConfirmacionNCkng();
@@ -36,17 +40,17 @@ describe('Realizar una nueva cuenta Checking, inicio de sesión y un depósito e
       
       // Navegar a la página de depósito
       await HomePage.irADeposit();
+      allure.addStep('Select new checking account');
       await DepositPage.selectAccountDeposit();
-      // Seleccionar la cuenta para el depósito
       await DepositPage.selectAccountForDeposit();
-      // Ingresar el monto del depósito
+      allure.addStep('Enter amount');
       await DepositPage.enterDepositAmount(depositAmount);
-      // Enviar el formulario de depósito
       await DepositPage.clickSubmit();
-      // Verificar que se haya redirigido a la página de vista de la cuenta Checking
+      
+      allure.addStep('Validate deposit');
       await DepositPage.validarViewCheckingPage();
-      // Realizar las verificaciones adicionales en la página de vista de la cuenta Checking
-      // Borrar los datos creados usando el botón "Delete Data" en el menú superior derecho en el home
+
+      allure.addStep('Delete data');
       await HomePage.clickDeleteData();
       await browser.pause(2000);
     } catch (error) {
@@ -55,7 +59,7 @@ describe('Realizar una nueva cuenta Checking, inicio de sesión y un depósito e
     }
   });
   after(async () => {
-    // Cerrar sesión
+    allure.addStep('LogOut');
     await HomePage.logOut();
   });
 });
