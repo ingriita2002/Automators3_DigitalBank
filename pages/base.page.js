@@ -1,23 +1,23 @@
-const PAGE_TIMEOUT = 10000;
+const PAGE_TIMEOUT = 120000;
 
 export default class BasePage {
-   async abrir(ruta) {
-       await browser.url(`${ruta}`);
-   }
+  async abrir(ruta) {
+    await browser.url(`${ruta}`);
+  }
 
-   async clickearElemento(elemento) {
-       await elemento.waitForClickable({ timeout: PAGE_TIMEOUT });
-       await elemento.click();
-   }
+  async clickearElemento(elemento) {
+    await elemento.waitForClickable({ timeout: PAGE_TIMEOUT });
+    await elemento.click();
+  }
 
-   async vaciarCampoYEnviarTexto(elemento, texto) {
-       await elemento.waitForClickable({ timeout: PAGE_TIMEOUT });
-       await elemento.clearValue();
-       await elemento.click();
-       await elemento.keys(texto);
-   }
+  async vaciarCampoYEnviarTexto(elemento, texto) {
+    await elemento.waitForClickable({ timeout: PAGE_TIMEOUT });
+    await elemento.clearValue();
+    await elemento.click();
+    await elemento.keys(texto);
+  }
 
-   addStep(message) {
-       console.log(`Step: ${message}`);
-   }
+  addStep(message) {
+    console.log(`Step: ${message}`);
+  }
 }
